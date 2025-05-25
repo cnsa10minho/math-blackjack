@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>블랙잭 게임</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1>블랙잭 게임</h1>
+
+    <div id="game-container">
+        <div id="dealer-section">
+            <h2>딜러 카드</h2>
+            <div id="dealer-hand" class="card-area"></div>
+            <div id="dealer-total" class="hand-total">합계: ?</div>
+        </div>
+
+        <div id="player-hand-section">
+            <h2>플레이어 카드</h2>
+            <div id="player-hand" class="card-area"></div>
+            <div id="player-total" class="hand-total">합계: 0</div>
+        </div>
+
+        <div id="buttons">
+            <button id="start-btn">게임 시작</button>
+            <button id="hit-btn" class="game-btn" style="display: none;" disabled>Hit</button>
+            <button id="stand-btn" class="game-btn" style="display:none;" disabled>Stand</button>
+        </div>
+    </div>
+
+    <div id="chart-toggle-container">
+        <button id="toggle-chart-btn">차트 숨기기</button>
+    </div>
+
+    <div id="charts-wrapper">
+        <div id="hit-chart-container" class="chart-box">
+            <h2>Hit 확률 차트</h2>
+            <canvas id="probability-chart"></canvas>
+            <div id="probability-text">
+                Hit 시 이득을 볼 확률: -- %
+            </div>
+        </div>
+
+        <div id="win-rate-chart-container" class="chart-box">
+            <h2>승률 차트</h2>
+            <canvas id="win-rate-chart"></canvas>
+            <div id="win-rate-info">
+                총 게임: <span id="games-played-info">0</span> | 승리: <span id="games-won-info">0</span>
+                <div id="win-rate-percentage" style="margin-top: 10px; font-weight: bold;">현재 승률: -- %</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="status-overlay" style="display:none;">
+        <div id="status-content">
+            <div id="status-text"></div>
+            <button id="restart-btn">다시하기</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

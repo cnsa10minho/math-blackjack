@@ -1,0 +1,273 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    font-size: 16px;
+    background-color: #f0f4f8; /* 밝은 배경 */
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 2.8rem;
+    color: #2c3e50;
+    margin-bottom: 25px;
+}
+
+h2 {
+    font-size: 1.6rem;
+    color: #34495e;
+    margin-bottom: 12px;
+}
+
+#game-container {
+    background-color: #e0e6ec;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#dealer-section,
+#player-hand-section {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.card-area {
+    min-height: 110px; /* 카드 표시 영역 최소 높이 */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px; /* 카드 사이 간격 */
+    margin-top: 10px;
+}
+
+.hand-total {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2980b9;
+    margin-top: 15px;
+}
+
+button {
+    font-size: 1.1rem;
+    padding: 12px 25px;
+    margin: 8px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: #3498db; /* 밝은 파랑 */
+    color: white;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover:enabled {
+    background-color: #2980b9; /* 진한 파랑 */
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    background-color: #cccccc;
+    color: #888888;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.game-btn {
+    min-width: 120px; /* Hit/Stand 버튼 최소 너비 */
+}
+
+.card {
+    display: inline-flex; /* 텍스트 정렬을 위해 flex 사용 */
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    width: 70px; /* 카드 크기 확대 */
+    height: 100px; /* 카드 크기 확대 */
+    font-size: 36px; /* 카드 숫자 크기 확대 */
+    font-weight: bold;
+    position: relative;
+    background-color: #ffffff;
+    user-select: none;
+    color: #333;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.card.red {
+    color: #e74c3c; /* 빨간색 하트/다이아 */
+}
+
+.card .suit {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    font-size: 24px; /* 문양 크기 확대 */
+    line-height: 1; /* 문양 줄 높이 */
+}
+
+#status-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85); /* 더 어둡게 */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px); /* 배경 블러 효과 */
+}
+
+#status-content {
+    background-color: #2c3e50; /* 어두운 배경 */
+    border-radius: 15px;
+    padding: 40px 50px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    transform: scale(0.9);
+    animation: popIn 0.3s forwards ease-out;
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#status-text {
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    color: #ecf0f1;
+}
+
+#restart-btn {
+    font-size: 1.6rem;
+    padding: 15px 40px;
+    background-color: #f39c12; /* 오렌지색 */
+}
+
+#restart-btn:hover:enabled {
+    background-color: #e67e22; /* 진한 오렌지색 */
+}
+
+#charts-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    width: 90%;
+    max-width: 1000px; /* 차트 래퍼 최대 너비 */
+    margin-top: 30px;
+}
+
+.chart-box {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px; /* 각 차트 박스 최대 너비 */
+    margin-bottom: 20px; /* 모바일에서 차트 간 간격 */
+    box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
+}
+
+.chart-box canvas {
+    width: 100% !important; /* Chart.js 캔버스 너비를 100%로 강제 */
+    height: 250px !important; /* 고정 높이 */
+}
+
+#probability-text, #win-rate-info {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: #555;
+    font-weight: 500;
+}
+
+#win-rate-info span {
+    color: #3498db;
+    font-weight: bold;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 10px 20px;
+        margin: 5px;
+    }
+
+    .card {
+        width: 60px;
+        height: 85px;
+        font-size: 30px;
+        border-radius: 8px;
+    }
+
+    .card .suit {
+        font-size: 20px;
+        bottom: 5px;
+        right: 5px;
+    }
+
+    #status-text {
+        font-size: 2rem;
+    }
+
+    #restart-btn {
+        font-size: 1.4rem;
+        padding: 12px 30px;
+    }
+
+    #charts-wrapper {
+        flex-direction: column; /* 세로로 정렬 */
+        align-items: center;
+        gap: 20px;
+    }
+
+    .chart-box {
+        max-width: 90%; /* 모바일에서 더 넓게 */
+        padding: 15px;
+    }
+
+    .chart-box canvas {
+        height: 200px !important; /* 모바일에서 높이 조정 */
+    }
+
+    #probability-text, #win-rate-info {
+        font-size: 1rem;
+    }
+}
